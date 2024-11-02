@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Maladies avec Patients</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Style du conteneur principal */
+        .container {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style du titre */
+        h2 {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        /* Style du tableau */
+        .table {
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden; /* Pour arrondir les coins du tableau */
+        }
+
+        /* Styles des en-têtes de tableau */
+        thead {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        /* Animation des boutons */
+        .btn {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Style de l'élément de retour */
+        .btn-outline-info {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">Liste des Maladies avec Patients</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Nom de la Maladie</th>
+            <th>Description</th>
+            <th>Patients Associés</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="maladie : ${maladies}">
+            <td th:text="${maladie.name}"></td>
+            <td th:text="${maladie.description}"></td>
+            <td>
+                <ul class="list-unstyled">
+                    <li th:each="patient : ${maladie.patients}">
+                        <span th:text="${patient.name}"></span>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-outline-info">Retour à l'accueil</a>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

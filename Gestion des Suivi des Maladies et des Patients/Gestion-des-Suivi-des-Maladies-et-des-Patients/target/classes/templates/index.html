@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil - Gestion des Maladies et Patients</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Style global avec fond dégradé */
+    body {
+      background: linear-gradient(to right, #74ebd5, #ace5d1);
+      color: #333;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Conteneur central stylisé */
+    .container {
+      background-color: #ace5d1;
+      border-radius: 15px;
+      padding: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      margin-top: 50px;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    /* Animation d’apparition */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Style du titre de la page */
+    h1.text-primary {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    /* Boutons de navigation stylisés */
+    .btn-outline-info, .btn-success {
+      border-radius: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      transition: transform 0.3s, background-color 0.3s, color 0.3s;
+    }
+
+    .btn-outline-info:hover {
+      background-color: #007bff;
+      color: #290b4a;
+      transform: scale(1.05);
+    }
+
+    .btn-success:hover {
+      background-color: #28a745;
+      color: #d900ff;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container text-center">
+  <h1 class="text-center text-primary mb-4">Accueil</h1>
+
+  <!-- Navigation -->
+  <nav class="text-center">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a href="/maladies/liste" class="btn btn-outline-info">Liste des Maladies</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="/patients/liste" class="btn btn-outline-info">Liste des Patients</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Liens vers les formulaires d'ajout -->
+  <div class="text-center mt-4">
+    <a href="/maladies/new" class="btn btn-success mr-2">Ajouter une Maladie</a>
+    <a href="/patients/new" class="btn btn-success">Ajouter un Patient</a>
+  </div>
+</div>
+<style>
+  body {
+    background: url("../static/medecin-min.jpg") no-repeat center;
+    background-size: cover;
+    height: 100vh;
+  }
+</style>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

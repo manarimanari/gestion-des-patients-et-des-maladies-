@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des Patients</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Style du conteneur principal */
+    .container {
+      background-color: #ace5d1;
+      border-radius: 15px;
+      padding: 30px;
+      margin-top: 50px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style du titre */
+    h1 {
+      font-weight: bold;
+      color: #d900ff;
+    }
+
+    /* Style du tableau */
+    .table {
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden; /* Pour arrondir les coins du tableau */
+    }
+
+    /* Styles des en-têtes de tableau */
+    thead {
+      background-color: #343a40;
+      color: #fff;
+    }
+
+    /* Animation des boutons */
+    .btn {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Style de l'élément de retour */
+    .btn-outline-info {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 20px;
+    }
+
+    /* Style de la barre de recherche */
+    .search-bar {
+      margin-bottom: 20px;
+    }
+
+    .search-bar input[type="text"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ace5d1;
+      font-size: 16px;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="text-center mb-4">Liste des Patients</h1>
+
+  <!-- Barre de recherche -->
+  <div class="search-bar text-center">
+    <input type="text" id="search" placeholder="Rechercher un patient..." onkeyup="searchPatients()">
+  </div>
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Âge</th>
+      <th>Antécédents Médicaux</th>
+      <th>Maladies Associées</th>
+      <th>Actions</th> <!-- Colonne pour les boutons Modifier et Supprimer -->
+    </tr>
+    </thead>
+    <tbody id="patientTable">
+    <tr th:each="patient : ${patients}">
+      <td th:text="${patient.id}"></td>
+      <td th:text="${patient.name}"></td>
+      <td th:text="${patient.age}"></td>
+      <td th:text="${patient.antecedentsmedicaux}"></td>
+      <td>
+        <ul class="list-unstyled">
+          <li th:each="maladie : ${patient.maladies}">
+            <a th:href="@{/maladies/{id}(id=${maladie.id})}" th:text="${maladie.name}"></a>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <a th:href="@{/patients/edit/{id}(id=${patient.id})}" class="btn btn-warning btn-sm">Modifier</a> <!-- Bouton Modifier -->
+        <a th:href="@{/patients/delete/{id}(id=${patient.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">Supprimer</a> <!-- Bouton Supprimer -->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-outline-info">Retour à l'accueil</a>
+  </div>
+</div>
+
+<script>
+  // Fonction de recherche
+  function searchPatients() {
+    const searchInput = document.getElementById("search").value.toLowerCase();
+    const patientRows = document.querySelectorAll("#patientTable tr");
+
+    patientRows.forEach(row => {
+      const patientName = row.cells[1].textContent.toLowerCase(); // La colonne 1 correspond au nom du patient
+      if (patientName.includes(searchInput)) {
+        row.style.display = ""; // Affiche la ligne si le nom contient la chaîne de recherche
+      } else {
+        row.style.display = "none"; // Cache la ligne si le nom ne contient pas la chaîne de recherche
+      }
+    });
+  }
+</script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

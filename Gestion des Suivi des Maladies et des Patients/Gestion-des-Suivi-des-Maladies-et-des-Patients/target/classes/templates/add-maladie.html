@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une Maladie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Arrière-plan en dégradé */
+        body {
+            background: linear-gradient(135deg, #e09, #d0e);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Animation de zoom pour le formulaire */
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 30px;
+            animation: zoomIn 0.5s ease-in-out;
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .btn-primary {
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #4cae4c;
+        }
+
+        .btn-secondary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 20px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Ajouter une Maladie</h2>
+
+    <form action="/maladies/add" method="post">
+        <div class="form-group">
+            <label for="name">Nom de la Maladie</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+        <a href="/" class="btn btn-secondary">Retour à l'accueil</a>
+    </form>
+</div>
+
+</body>
+</html>

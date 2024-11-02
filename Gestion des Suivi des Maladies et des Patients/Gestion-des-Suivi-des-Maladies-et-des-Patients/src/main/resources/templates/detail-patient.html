@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Patient</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Style global du fond et des couleurs */
+        body {
+            background: linear-gradient(to right, #74ebd5, #dde5ac);
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Conteneur stylisé avec ombre et bordure arrondie */
+        .container {
+            background-color: #d900ff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.6s ease-in-out;
+            max-width: 700px;
+            margin-top: 50px;
+        }
+
+        /* Animation d’apparition */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Titre de la page stylisé */
+        .text-primary {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        /* Liste des maladies associées */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            margin: 5px 0;
+            padding: 10px;
+        }
+
+        /* Bouton de retour stylisé */
+        .btn-outline-info {
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-outline-info:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center text-primary mb-4">Détails du Patient</h1>
+
+    <h3 th:text="${patient.name}"></h3>
+    <p><strong>Âge :</strong> <span th:text="${patient.age}"></span></p>
+    <p><strong>Antécédents Médicaux :</strong> <span th:text="${patient.antecedentsmedicaux}"></span></p>
+
+    <h4 class="mt-4">Maladies Associées</h4>
+    <ul>
+        <li th:each="maladie : ${maladies}" th:text="${maladie.name}"></li>
+    </ul>
+
+    <div class="text-center mt-4">
+        <a href="/maladies/liste" class="btn btn-outline-info">Retour à la Liste des Maladies</a>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Maladies</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Conteneur principal */
+        .container {
+            background-color: #ace5d1;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style du titre */
+        h1.text-primary {
+            font-weight: bold;
+            color: #007bff;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tableau stylisé */
+        .table {
+            margin-top: 20px;
+        }
+
+        .thead-dark th {
+            background-color: #343a40;
+            color: #d900ff;
+            border: none;
+        }
+
+        /* Boutons d’action avec animation */
+        .btn {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Boutons de retour et ajout stylisés */
+        .btn-outline-info {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        /* Style de la barre de recherche */
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-bar input[type="text"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ace5d1;
+            font-size: 16px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center text-primary mb-4">Liste des Maladies</h1>
+
+    <!-- Barre de recherche -->
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Rechercher une maladie..." onkeyup="searchMaladies()">
+    </div>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom de la Maladie</th>
+            <th>Description</th>
+            <th>Patients Associés</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="maladieTable">
+        <tr th:each="maladie : ${maladies}">
+            <td th:text="${maladie.id}"></td>
+            <td th:text="${maladie.name}"></td>
+            <td th:text="${maladie.description}"></td>
+            <td>
+                <ul>
+                    <li th:each="patient : ${maladie.patients}">
+                        <a th:href="@{/patients/{id}(id=${patient.id})}" th:text="${patient.name}"></a>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <!-- Bouton Modifier -->
+                <a th:href="@{/maladies/edit/{id}(id=${maladie.id})}" class="btn btn-warning btn-sm">Modifier</a>
+                <!-- Bouton Supprimer -->
+                <a th:href="@{/maladies/delete/{id}(id=${maladie.id})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette maladie ?');">
+                    Supprimer
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-outline-info">Retour à l'accueil</a>
+    </div>
+</div>
+
+<script>
+    // Fonction de recherche
+    function searchMaladies() {
+        const searchInput = document.getElementById("search").value.toLowerCase();
+        const maladieRows = document.querySelectorAll("#maladieTable tr");
+
+        maladieRows.forEach(row => {
+            const maladieName = row.cells[1].textContent.toLowerCase(); // La colonne 1 correspond au nom de la maladie
+            if (maladieName.includes(searchInput)) {
+                row.style.display = ""; // Affiche la ligne si le nom contient la chaîne de recherche
+            } else {
+                row.style.display = "none"; // Cache la ligne si le nom ne contient pas la chaîne de recherche
+            }
+        });
+    }
+</script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
